@@ -1,5 +1,10 @@
-import Image from "next/image";
+import Navigation from "./components/navigation";
 
 export default function Page() {
-  return <h1>Hello, Next.js!</h1>;
+  return (
+    <>
+      <Navigation />
+      <h1>Hello, Next.js!</h1>
+    </>
+  );
 }
