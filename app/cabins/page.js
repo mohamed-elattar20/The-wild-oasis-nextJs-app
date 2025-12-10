@@ -1,7 +1,10 @@
-import { CabinCard } from "@/app/_components/CabinCard";
+import CabinCard from "@/app/_components/CabinCard";
+import { getCabins } from "../_lib/data-service";
 
 const Page = async () => {
-  const cabins = []; // CHANGE
+  const cabins = await getCabins();
+  console.log(cabins);
+
   return (
     <>
       <div>
