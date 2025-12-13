@@ -11,6 +11,9 @@ const nextConfig = {
       },
     ],
   },
+  // added for static site generation (SSG) with next export
+  // only used if all our pages are statically generated
+  // output: "export",
 };
 
 export default nextConfig;
