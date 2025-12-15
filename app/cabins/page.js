@@ -1,6 +1,7 @@
 import CabinList from "@/app/_components/CabinList";
 import { Suspense } from "react";
 import Spinner from "@/app/_components/Spinner";
+import Filter from "@/app/_components/Filter";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0; // to make this page dynamic and not statically generated
@@ -10,7 +11,9 @@ export const metadata = {
   title: "Cabins",
 };
 
-const Page = () => {
+const Page = ({ searchParams }) => {
+  const filter = searchParams?.capacity ?? "all";
+
   return (
     <>
       <div>
@@ -26,8 +29,12 @@ const Page = () => {
           vacation. Welcome to paradise.
         </p>
 
-        <Suspense fallback={<Spinner />}>
-          <CabinList />
+        <div className="mb-8 flex justify-end">
+          <Filter />
+        </div>
+
+        <Suspense fallback={<Spinner />} key={filter}>
+          <CabinList filter={filter} />
         </Suspense>
       </div>
     </>
