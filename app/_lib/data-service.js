@@ -1,6 +1,8 @@
 import { eachDayOfInterval } from "date-fns";
 import { supabase } from "./supabase";
 import { notFound } from "next/navigation";
+// import { unstable_noStore as noStore } from "next/cache";
+// import { cookies } from "next/headers";
 /////////////
 // GET
 
@@ -37,6 +39,8 @@ export async function getCabinPrice(id) {
 }
 
 export const getCabins = async function () {
+  // noStore used here to always get fresh data on each request, to make the component dynamic
+  // noStore();
   const { data, error } = await supabase
     .from("cabins")
     .select("id, name, maxCapacity, regularPrice, discount, image")

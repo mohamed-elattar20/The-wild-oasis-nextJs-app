@@ -2,6 +2,14 @@ import CabinList from "@/app/_components/CabinList";
 import { Suspense } from "react";
 import Spinner from "@/app/_components/Spinner";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0; // to make this page dynamic and not statically generated
+// export const fetchCache = "force-no-store"; // to make fetch requests always fetch fresh data when mounting the page
+
+export const metadata = {
+  title: "Cabins",
+};
+
 const Page = () => {
   return (
     <>
