@@ -2,6 +2,7 @@ import CabinList from "@/app/_components/CabinList";
 import { Suspense } from "react";
 import Spinner from "@/app/_components/Spinner";
 import Filter from "@/app/_components/Filter";
+import ReservationReminder from "@/app/_components/ReservationReminder";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0; // to make this page dynamic and not statically generated
@@ -35,6 +36,7 @@ const Page = ({ searchParams }) => {
 
         <Suspense fallback={<Spinner />} key={filter}>
           <CabinList filter={filter} />
+          <ReservationReminder />
         </Suspense>
       </div>
     </>
