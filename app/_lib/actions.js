@@ -35,6 +35,8 @@ export async function updateGuestProfileAction(formData) {
 }
 
 export async function deleteReservationAction(bookingId) {
+  // await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate delay
+  // throw new Error("Simulated error for testing purposes.");
   const session = await auth();
   if (!session) throw new Error("Not authenticated, you must be loggedIn.");
 
