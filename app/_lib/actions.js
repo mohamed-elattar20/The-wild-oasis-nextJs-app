@@ -34,6 +34,32 @@ export async function updateGuestProfileAction(formData) {
   revalidatePath("/account/profile");
 }
 
+export async function createReservationAction(bookingData, formData) {
+  const session = await auth();
+  if (!session) throw new Error("Not authenticated, you must be loggedIn.");
+
+  const newBooking = {
+    ...bookingData,
+    guestId: session.user.guestId,
+    numGuests: Number(formData.get("numGuests")),
+    observations: formData.get("observations").slice(0, 1000),
+    extrasPrice: 0,
+    totalPrice: bookingData.cabinPrice,
+    isPaid: false,
+    hasBreakfast: false,
+    status: "unconfirmed",
+  };
+
+  const { error } = await supabase.from("bookings").insert([newBooking]);
+  // // So that the newly created object gets returned!
+  // .select()
+  // .single();
+
+  if (error) throw new Error("Booking could not be created");
+  revalidatePath(`/cabins/${bookingData.cabinId}`);
+  redirect("/cabins/thankyou");
+}
+
 export async function deleteReservationAction(bookingId) {
   // await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate delay
   // throw new Error("Simulated error for testing purposes.");
